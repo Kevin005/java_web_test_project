@@ -24,7 +24,6 @@
 	<mvc:resources mapping="/html/**" location="/html/" />
 
 
-
 	<!-- 定义跳转的文件的前后缀 ，视图模式配置-->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
