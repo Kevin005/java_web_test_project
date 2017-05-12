@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
 	<!-- 加载Spring容器配置 -->
@@ -12,7 +12,7 @@
 	<!-- 设置Spring容器加载所有的配置文件的路径 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:config/spring-*.xml</param-value>
+		<param-value>classpath*:config/spring-*.xml,classpath*:config/applicationContext-*.xml</param-value>
 	</context-param>
 
 	<!-- 配置SpringMVC核心控制器 -->
@@ -40,6 +40,11 @@
 		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
 	</listener>
 
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/error404.jsp</location>
+	</error-page>
+
 	<!-- 解决工程编码过滤器 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
@@ -62,4 +67,8 @@
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
+
+	<session-config>
+		<session-timeout>60</session-timeout>
+	</session-config>
 </web-app>

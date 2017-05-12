@@ -22,7 +22,16 @@
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">
-      <configuration />
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/resources/applicationContext-quartz.xml</file>
+          <file>file://$MODULE_DIR$/src/config/applicationContext-quartz.xml</file>
+        </fileset>
+        <fileset id="fileset2" name="Spring Application Context (2)" removed="false">
+          <file>file://$MODULE_DIR$/src/resources/applicationContext-quartz.xml</file>
+          <file>file://$MODULE_DIR$/src/config/applicationContext-quartz1.xml</file>
+        </fileset>
+      </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
@@ -38,5 +47,7 @@
     <orderEntry type="library" name="servlet-api" level="project" />
     <orderEntry type="library" name="fastjson-1.1.8" level="project" />
     <orderEntry type="library" name="fastjson-1.1.81" level="project" />
+    <orderEntry type="library" name="quartz-1.8.6" level="project" />
+    <orderEntry type="library" name="quartz-all-1.8.5" level="project" />
   </component>
 </module>

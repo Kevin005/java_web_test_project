@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	<!-- default-autowire="byName" default-lazy-init="false"此两个值可以不配置 -->
+	<description>Quartz Job Setting</description>
+  <!-- ①配置调度的任务对应bean的id和自定义class-->
+  <bean id="myQuartz" class="com.tgb.task.Quartz" />
+  <!-- ②配置调度任务对应的bean的id和执行的方法,作业不并发调度-->
+  <bean id="myDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="myQuartz" />
+    <property name="targetMethod" value="tips" />
+    <property name="concurrent" value="false" />
+  </bean>
+  <!-- ③配置调度任务执行的触发的时间-->
+  <bean id="myTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+  <property name="jobDetail" ref="myDetail" />
+     <property name="cronExpression">
+     <!-- 每分钟的第3秒执行任务调度 -->
+      <value>0/10 * * * * ?</value>
+    </property>
+  </bean>
+  <!--  ④Quartz的调度工厂，调度工厂只能有一个，多个调度任务在list中添加,总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序 -->
+  <bean id="taskManager" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    <property name="triggers">
+      <list>
+         <!-- 所有的调度列表-->
+        <ref bean="myTrigger" />
+<!-- <ref bean="myTrigger1" />
+        <ref bean="myTrigger2" />
+        对应的bean配置：id="myDetail1" 和 id="myTrigger1" 可以对应多配置
+  -->
+      </list>
+    </property>
+  </bean>
+
+</beans>
